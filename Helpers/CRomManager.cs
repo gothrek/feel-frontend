@@ -1,5 +1,5 @@
 ﻿/* 
- * Copyright (c) 2011-2018 FEELTeam - Maurizio Montel.
+ * Copyright (c) 2011-2020 FEELTeam - Maurizio Montel.
  * 
  * This file is part of the FEEL (FrontEnd - Emulator Launcher) distribution.
  *   (https://github.com/dr-prodigy/feel-frontend)
@@ -50,13 +50,13 @@ namespace feel
                 {
                     var file = fileList[iLoop];
                     var romName = Path.GetFileNameWithoutExtension(file);
+                    var romFileName = Path.GetFileName(file);
                     var item = new RomDesc();
                     item.Key = romName;
                     item.Description = LabelCleanup(romName);
 
                     var romRelativePath = fileList[iLoop].Substring(romPath.Length + 1); // skip initial backslash
-                    romRelativePath = romRelativePath.Substring(0,
-                        romRelativePath.Length - romName.Length - objConfig.rom_extension.Split(',')[0].Trim().Length - 1); // skip "."
+                    romRelativePath = romRelativePath.Substring(0, romRelativePath.Length - romFileName.Length);
 
                     if (romRelativePath != string.Empty)
                     {
@@ -119,9 +119,9 @@ namespace feel
                     for (var iLoop = 0; iLoop < fileList.Length; iLoop++)
                     {
                         var romName = Path.GetFileNameWithoutExtension(fileList[iLoop]);
+                        var romFileName = Path.GetFileName(fileList[iLoop]);
                         var romRelativePath = fileList[iLoop].Substring(romPath.Length + 1); // skip initial backslash
-                        romRelativePath = romRelativePath.Substring(0,
-                            romRelativePath.Length - romName.Length - objConfig.rom_extension.Split(',')[0].Trim().Length - 1); // skip "."
+                        romRelativePath = romRelativePath.Substring(0, romRelativePath.Length - romFileName.Length);
                         var item = srcList.Find(c => c.Key.ToLower() == romName);
                         if (item != null)
                         {
